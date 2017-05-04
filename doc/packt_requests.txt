@@ -89,7 +89,7 @@ GET https://www.packtpub.com/account/my-ebooks
                             <a href="<link>">
                                 <div class="fake-button">
                                     ...
-                                    <div class="fake-button-text>
+                                    <div class="fake-button-text">
                                         <link_type>
                                     </div>
                                     ...
