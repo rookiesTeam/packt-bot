@@ -1,5 +1,5 @@
 // Login
-POST https://www.packetpub.com/
+POST https://www.packtpub.com/
 
     ----------------------------------------------------------------------
     Request:
