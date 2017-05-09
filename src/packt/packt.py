@@ -7,6 +7,8 @@ import requests
 
 # Base Packt website url
 PACKT_URL = "https://www.packtpub.com"
+HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'}
+PAYLOAD = {'email':'','form_id':'packt_user_login_form','password':''}
 
 
 class User:
@@ -20,8 +22,14 @@ class User:
         pass
 
     def find_free_ebook(self):
-        # TODO: find the free ebook url. Return it if found, else return None.
-        pass
+        #find the free ebook url. Return it if found, else return None.
+        
+        link_to_free = PACKT_URL+'/packt/offers/free-learning'
+        req = requests.get(link_to_free, headers=headers)
+        soup = BeautifulSoup(req.text,'html.parser')
+        link = soup.find("a", class_="twelve-days-claim").get('href')
+
+        return link
 
     def take_free_ebook(self, ebook_url):
         # TODO: take the free ebook. Return a boolean which specifies if the ebook was taken or not.
