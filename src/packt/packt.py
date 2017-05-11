@@ -1,20 +1,20 @@
 #
 #   Packt user abstraction.
 #
-
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
 # Base Packt website url
 PACKT_URL = "https://www.packtpub.com"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'}
-PAYLOAD = {'email':'','form_id':'packt_user_login_form','password':''}
+PAYLOAD = {'email':'','form_id':'packt_user_login_form','password':''} #quitarlo de aqui cuando este la parte de obtener las credenciales
+SESSION = ''
 
 
 class User:
 
     def __init__(self):
-        # TODO: add initial data configurations (requests session, session headers, ...)
+        # TODO: add initial data configurations (requests session, session headers,
         pass
 
     def login(self, email, password):
@@ -23,12 +23,12 @@ class User:
 
     def find_free_ebook(self):
         #find the free ebook url. Return it if found, else return None.
-        
+        SESSION = requests.Session()
+        SESSION.cookies.update(PAYLOAD)
         link_to_free = PACKT_URL+'/packt/offers/free-learning'
-        req = requests.get(link_to_free, headers=headers)
+        req = SESSION.get(link_to_free, headers=HEADERS)
         soup = BeautifulSoup(req.text,'html.parser')
         link = soup.find("a", class_="twelve-days-claim").get('href')
-
         return link
 
     def take_free_ebook(self, ebook_url):
